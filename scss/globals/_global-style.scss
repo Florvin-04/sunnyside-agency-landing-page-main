@@ -1,0 +1,20 @@
+@use "../utils/" as *;
+
+.visually-hidden {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.container {
+  width: min(90%, rem(1024));
+  margin: auto;
+}
+
+a {
+  text-decoration: none;
+  display: block;
+}

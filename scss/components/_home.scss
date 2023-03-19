@@ -1,0 +1,305 @@
+@use "../utils/" as *;
+
+body {
+  font-size: rem(18);
+  font-family: $font-200;
+}
+
+.app {
+  max-width: rem(1440);
+  margin-inline: auto;
+}
+
+.hero {
+  background-image: url(../../images/mobile/image-header.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 68vh;
+
+  @include breakpoint(medium) {
+    background-image: url(../../images/desktop/image-header.jpg);
+    height: 100vh;
+  }
+
+  &__header {
+    padding-top: 2rem;
+    display: flex;
+    // align-items: center;
+    justify-content: space-between;
+
+    @include breakpoint(medium) {
+      align-items: center;
+    }
+
+    &--logo {
+      width: 7rem;
+    }
+
+    &--menu {
+      background-image: url(../../images/icon-hamburger.svg);
+      background-repeat: no-repeat;
+      background-size: cover;
+      border: none;
+      height: 1rem;
+      width: 1.3rem;
+      cursor: pointer;
+      background-color: transparent;
+
+      @include breakpoint(medium) {
+        display: none;
+      }
+    }
+
+    &--navigation {
+      margin-top: 4rem;
+      position: fixed;
+      z-index: 10;
+      background-color: hsl(var(--Neutral-500));
+      inset: 0;
+      width: 90%;
+      margin-inline: auto;
+      text-align: center;
+      overflow: hidden;
+
+      opacity: 0;
+      height: 0;
+      padding-block: 0;
+
+      // transition: opacity ease-in 0.3s, height ease-in 2s, padding-block, ease-in 0.2s;
+      transition: height 0.1s ease-in, padding-block 0.1s ease-in, opacity 0.2s ease-in;
+
+      @include breakpoint(medium) {
+        position: relative;
+        opacity: 1;
+        height: max-content;
+        width: max-content;
+        margin-inline: revert;
+        text-align: left;
+        background-color: transparent;
+        margin-top: 0;
+
+        display: flex;
+        align-items: center;
+
+        gap: 2em;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        background-image: url(../../images/desktop/image-header.jpg);
+        inset: 0;
+        clip-path: polygon(0 0, 100% 0%, 96% 8%, 0 8%);
+
+        @include breakpoint(medium) {
+          display: none;
+        }
+      }
+
+      &--link {
+        margin-top: 1rem;
+        display: inline-block;
+        color: hsl(var(--Neutral-300));
+        font-family: $font-100;
+        font-weight: 600;
+        font-size: rem(14);
+
+        @include breakpoint(medium) {
+          margin-top: 0;
+          font-size: rem(14);
+          color: hsl(var(--Neutral-500));
+        }
+      }
+
+      &--link.contact--link {
+        font-family: $font-200;
+        background-color: hsl(var(--Primary-200));
+        color: hsl(var(--Neutral-100));
+        border-radius: 100px;
+        padding: 0.5em 1.8em;
+        text-transform: uppercase;
+
+        @include breakpoint(medium) {
+          background-color: hsl(var(--Neutral-500));
+          padding: 0.7em 1.5em;
+
+          &:hover {
+            background-color: hsl(var(--Primary-500) / 0.3);
+            color: hsl(var(--Neutral-500));
+          }
+        }
+      }
+    }
+
+    &--navigation.active-nav {
+      height: rem(204);
+      padding-block: 1em;
+      opacity: 1;
+    }
+  }
+
+  h1 {
+    margin-top: 6rem;
+    text-align: center;
+    text-transform: uppercase;
+    color: hsl(var(--Neutral-500));
+    letter-spacing: 0.4rem;
+    font-size: 2.5rem;
+    position: relative;
+
+    &::after {
+      content: url(../../images/icon-arrow-down.svg);
+
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%);
+      margin-top: 6rem;
+    }
+  }
+}
+
+.service {
+  text-align: center;
+
+  .transform {
+    @include breakpoint(large) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    &__img--container {
+      grid-column: 2 / 3;
+    }
+
+    &__description--container {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+    }
+  }
+
+  .stand-out {
+    @include breakpoint(large) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  &__description--container {
+    padding: 3em 1em;
+
+    @include breakpoint(large) {
+      padding: 0 4em;
+      align-self: center;
+      text-align: left;
+    }
+
+    .service__title {
+      color: hsl(var(--Neutral-100));
+      font-weight: 900;
+      font-size: 2.1rem;
+    }
+
+    .service__description {
+      color: hsl(var(--Neutral-300));
+      font-family: $font-100;
+      font-size: 1.2rem;
+      // outline: 1px solid red;
+      width: min(100%, 44ch);
+      margin-inline: auto;
+
+      @include breakpoint(large) {
+        margin-inline: revert;
+      }
+    }
+
+    .learn-more__link {
+      margin-top: 1.5em;
+      color: hsl(var(--Neutral-100));
+      text-transform: uppercase;
+      font-size: 1rem;
+      position: relative;
+      display: inline-block;
+      isolation: isolate;
+    }
+
+    .learn-more__link.transform--link::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 110%;
+      height: rem(10);
+      background-color: hsl(39, 100%, 50%, 0.4);
+      bottom: 0;
+      left: -5%;
+      border-radius: 100px;
+    }
+    .learn-more__link.stand-out--link::after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      width: 110%;
+      height: rem(10);
+      background-color: hsl(350, 100%, 88%, 0.5);
+      bottom: 0;
+      left: -5%;
+      border-radius: 100px;
+    }
+  }
+
+  .more__services {
+    @include breakpoint(large) {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    &--wrapper {
+      display: grid;
+      .more__services-img--container,
+      .more__services-description--container {
+        grid-column: 1 / -1;
+        grid-row: 1 / -1;
+      }
+    }
+
+    .graphics__description--container {
+      color: hsl(var(--Primary-300));
+      padding-bottom: 3.5rem;
+      padding-inline: 0.5rem;
+      align-self: end;
+      // outline: 1px solid red;
+    }
+    .photography__description--container {
+      color: hsl(var(--Primary-400));
+      padding-bottom: 4rem;
+      padding-inline: 0.5rem;
+      align-self: end;
+    }
+
+    .more__services--description {
+      font-family: $font-100;
+      width: min(85%, 46ch);
+      margin-inline: auto;
+    }
+
+    .mobile__img {
+      max-height: 40rem;
+      width: 100%;
+    }
+  }
+}
+
+.desktop__img {
+  display: none;
+
+  @include breakpoint(medium) {
+    display: block;
+    width: 100vw;
+  }
+}
+
+.mobile__img {
+  object-fit: cover;
+  @include breakpoint(medium) {
+    display: none;
+  }
+}
